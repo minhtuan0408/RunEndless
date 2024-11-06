@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f013daf668058dc44bbf3bf86d295d64, type: 3}
+  m_Name: MapDATA
+  m_EditorClassIdentifier: 
+  SpeedTime: 0.7
+  Range: -36
+  Speed_Top: 5
+  SpawnTranform_Top: {x: 0, y: 24, z: -2}
+  Speed_Mid: 3
+  SpawnTranform_Mid: {x: 0, y: 24, z: -3}
+  Speed_Bot: 1
+  SpawnTranform_Bot: {x: 0, y: 24, z: -4}
