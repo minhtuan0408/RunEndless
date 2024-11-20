@@ -30,8 +30,11 @@ public class Player : MonoBehaviour
     #endregion
 
     #region ControllerOnMobile
+    public bool FreeMove;
     private Vector2 startTouchPosition;
     private Vector2 endTouchPosition;
+    private Vector3 targetPosition;
+    private Camera mainCamera;
     #endregion
 
     #region Skin
@@ -57,7 +60,7 @@ public class Player : MonoBehaviour
 
     public Transform[] RoadPosition;
     private int index;
-    private Vector3 targetPosition;
+    
     private void Awake()
     {
         transform.position = new Vector3(RoadPosition[1].position.x, RoadPosition[1].position.y, transform.position.z);
@@ -71,6 +74,8 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        FreeMove = false;
+        mainCamera = Camera.main;
         int selectedSkinIndex = PlayerPrefs.GetInt("SelectedSkin", 0);
         animator.runtimeAnimatorController = animatorControllers[selectedSkinIndex];
         targetPosition = transform.position;
@@ -78,63 +83,15 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (FreeMove)
         {
-            startTouchPosition = Input.GetTouch(0).position;
+            PlayerFreeController();
         }
-
-
-
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        else
         {
-            endTouchPosition = Input.GetTouch(0).position;
-            // check xem vuốt lên hay xuống;
-            Vector2 swipeVector = endTouchPosition - startTouchPosition;
-
-            if (swipeVector.sqrMagnitude > 0)
-            {   // Trái phải
-                if (Mathf.Abs(swipeVector.x) > Mathf.Abs(swipeVector.y))
-                {
-                    if (endTouchPosition.x < startTouchPosition.x)
-                    {
-                        targetPosition = RoadPosition[IndexToMoveLeft()].transform.position;
-                        ChangeState(PlayerState.Left);
-                    }
-                    else if (endTouchPosition.x > startTouchPosition.x)
-                    {
-                        targetPosition = RoadPosition[IndexToMoveRight()].transform.position;
-                        ChangeState(PlayerState.Right);
-                    }
-                }
-                // Lên Xuống
-                else
-                {
-
-                    if (endTouchPosition.y < startTouchPosition.y)
-                    {
-                        targetPosition = RoadPosition[IndexToMoveDown()].transform.position;
-
-                    }
-
-                    else if (endTouchPosition.y > startTouchPosition.y)
-                    {
-                        targetPosition = RoadPosition[IndexToMoveUp()].transform.position;
-
-                    }
-                }
-
-            }
-
+            MoveIndex();
         }
-
-        if (Math.Abs(transform.position.x - targetPosition.x) < 0.4f)
-        {
-            ChangeState(PlayerState.Idle);
-
-        }
-
-        transform.position = Vector3.Lerp(transform.position, targetPosition, 5f * Time.deltaTime);
+    
     }
     private int IndexToMoveLeft()
     {
@@ -237,8 +194,85 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(value);
         isShield = false;
         Shield.SetActive(false);
-    } 
-    
+    }
+
+    #region MoveController
+    public void MoveIndex()
+    {
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            startTouchPosition = Input.GetTouch(0).position;
+        }
+
+
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            endTouchPosition = Input.GetTouch(0).position;
+            // check xem vuốt lên hay xuống;
+            Vector2 swipeVector = endTouchPosition - startTouchPosition;
+
+            if (swipeVector.sqrMagnitude > 0)
+            {   // Trái phải
+                if (Mathf.Abs(swipeVector.x) > Mathf.Abs(swipeVector.y))
+                {
+                    if (endTouchPosition.x < startTouchPosition.x)
+                    {
+                        targetPosition = RoadPosition[IndexToMoveLeft()].transform.position;
+                        ChangeState(PlayerState.Left);
+                    }
+                    else if (endTouchPosition.x > startTouchPosition.x)
+                    {
+                        targetPosition = RoadPosition[IndexToMoveRight()].transform.position;
+                        ChangeState(PlayerState.Right);
+                    }
+                }
+                // Lên Xuống
+                else
+                {
+
+                    if (endTouchPosition.y < startTouchPosition.y)
+                    {
+                        targetPosition = RoadPosition[IndexToMoveDown()].transform.position;
+
+                    }
+
+                    else if (endTouchPosition.y > startTouchPosition.y)
+                    {
+                        targetPosition = RoadPosition[IndexToMoveUp()].transform.position;
+
+                    }
+                }
+
+            }
+
+        }
+
+        if (Math.Abs(transform.position.x - targetPosition.x) < 0.4f)
+        {
+            ChangeState(PlayerState.Idle);
+
+        }
+
+        transform.position = Vector3.Lerp(transform.position, targetPosition, 5f * Time.deltaTime);
+    }
+
+    public void PlayerFreeController()
+    {
+        if (Input.touchCount > 0 )
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved)
+            {
+                Touch touch = Input.GetTouch(0);
+                Vector3 touchPosition = mainCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
+                targetPosition = touchPosition;
+            }
+        }
+        transform.position = Vector2.Lerp(transform.position, targetPosition, 10f * Time.deltaTime);
+        
+
+    }
+    #endregion
 }
 
 

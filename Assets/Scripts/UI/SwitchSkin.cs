@@ -9,10 +9,6 @@ using UnityEngine;
 
 public class SwitchSkin : MonoBehaviour
 {
-    #region Controller
-    private Vector2 startTouch;
-    private Vector2 endTouch;
-    #endregion
 
     public GameObject[] SkinList;
 
@@ -27,30 +23,8 @@ public class SwitchSkin : MonoBehaviour
     {
         SkinList[currentSkin].gameObject.SetActive(true);
     }
-    private void Update()
-    {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) 
-        {
-            startTouch = Input.GetTouch(0).position;
-        }
 
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
-        {
-            endTouch = Input.GetTouch(0).position;
-
-            if (endTouch.x < startTouch.x)
-            {
-                SwitchLeft();
-            }
-
-            if (endTouch.x > startTouch.x)
-            {
-                SwitchRight();
-            }
-        }
-    }
-
-    private void SwitchLeft()
+    public void SwitchLeft()
     {
         SkinList[currentSkin].SetActive(false);
         if (currentSkin == SkinList.Length - 1)
@@ -65,7 +39,7 @@ public class SwitchSkin : MonoBehaviour
 
     }
 
-    private void SwitchRight()
+    public void SwitchRight()
     {
         SkinList[currentSkin].SetActive(false);
         if (currentSkin == 0)

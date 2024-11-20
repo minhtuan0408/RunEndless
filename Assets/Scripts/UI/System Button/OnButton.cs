@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnButton : MonoBehaviour
+public class Onbutton : MonoBehaviour
 {
     public GameObject[] gameObjects;
     public GameObject SettingMenu;

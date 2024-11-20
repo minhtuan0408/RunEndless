@@ -1,71 +1,44 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static BulletPooling;
 
 public class PlayerFire : MonoBehaviour
 {
-    #region TouchInput
-    private float lastTapTime = 0;
-    private float doubleTapThreshold = 0.3f;
-    #endregion
+    public float fireRate = 0.5f;
 
-    public GameObject[] Bullet;
-    private int bulletCount;
-   
+    private int PinkBulletLevel;
+    private int BlueBulletLevel;
+
+    [SerializeField] private List<BulletType> bulletTypes; // Gán trong Inspector
+    private Dictionary<string, BulletType> bulletTypeDict;
 
     private void Awake()
     {
-       
-        bulletCount = 0;
-    }
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Space) && canFire) 
-        //{
-        //    canFire = false;
-        //    Bullet[bulletCount].transform.position = transform.position;
-        //    Bullet[bulletCount].SetActive(true);
-        //    StartCoroutine(CoolDownFire());
-        //    bulletCount++;
-        //    if (bulletCount == Bullet.Length) 
-        //    {
-        //        bulletCount = 0;
-        //    }
-        //}
-
-        if (Input.touchCount == 1) 
+        // Tạo dictionary từ danh sách BulletType
+        bulletTypeDict = new Dictionary<string, BulletType>();
+        foreach (var type in bulletTypes)
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Began) 
+            if (!bulletTypeDict.ContainsKey(type.name))
             {
-                //print(Time.time);
-                if (Time.time  - lastTapTime <= doubleTapThreshold) 
-                {
-                    lastTapTime = 0;
-
-                    
-                    Bullet[bulletCount].transform.position = transform.position;
-                    Bullet[bulletCount].SetActive(true);
-
-                    AudioManager.Instance.PlaySFX("Player Fire");
-
-                    StartCoroutine(CoolDownFire());
-                    bulletCount++;
-                    if (bulletCount == Bullet.Length)
-                    {
-                        bulletCount = 0;
-                    }
-                }
-                else
-                {
-                    lastTapTime = Time.time;
-                }
+                bulletTypeDict.Add(type.name, type);
             }
         }
     }
 
-    IEnumerator CoolDownFire()
+    private void Update()
     {
-        yield return new WaitForSeconds(0.2f);
-        
+        if (Input.touchCount > 0) 
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved)
+            {
+               
+
+                GameObject bullet = BulletPooling.Instance.GetBullet("Blue", bulletTypes[0]); 
+
+            }
+        }
     }
+
+
 }
