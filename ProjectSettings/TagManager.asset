@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Shield
   - Magnet
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - UIPlayer
   - Enemy
   - Player
-  - 
-  - 
+  - Coin
+  - Item
   - 
   - 
   - 

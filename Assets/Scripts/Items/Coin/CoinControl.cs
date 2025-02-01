@@ -8,9 +8,11 @@ public class CoinControl : MonoBehaviour
     public GameObject[] coinLine;
     public GameObject Coin;
 
+
     private void Start()
     {
         StartCoroutine(SpawnCoin());
+
     }
 
     IEnumerator SpawnCoin()
@@ -20,8 +22,11 @@ public class CoinControl : MonoBehaviour
         {
             for (int i = 0; i < 6; i++)
             {
+                GameObject coin = CoinPooling.Instance.GetCoin();
+                coin.SetActive(true);
+                coin.transform.position = coinLine[randomPosition].transform.position;
                 yield return new WaitForSeconds(0.2f);
-                Instantiate(Coin, coinLine[randomPosition].transform.position, Quaternion.identity);
+                
             }
             int randomTime = Random.Range(2, 4);
             yield return new WaitForSeconds(randomTime);

@@ -6,7 +6,6 @@ using UnityEngine.Windows;
 
 public class BulletPooling : MonoBehaviour
 {
-
     public static BulletPooling Instance { get; private set;}
     public int size = 3;
 
@@ -43,7 +42,7 @@ public class BulletPooling : MonoBehaviour
         foreach (BulletType type in bulletList) 
         {
             Queue<GameObject> newPool = new Queue<GameObject>();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < size; i++)
             {
                 GameObject bullet = Instantiate(type.prefab, transform);
                 bullet.SetActive(false);
@@ -61,13 +60,12 @@ public class BulletPooling : MonoBehaviour
             if ( bullet.Count > 0) 
             {
                 GameObject Bullet = bullet.Dequeue();
+                print(bullet.Count);
                 Bullet.SetActive(true);
                 return Bullet;
-
             }
 
             GameObject newBullet = Instantiate(type.prefab, transform);
-            bullet.Enqueue(newBullet);
             return newBullet;
         }
         return null;

@@ -1,57 +1,74 @@
-﻿using System.Collections;
+﻿using BeehaviourTree;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class BossControl : BaseEnemy
 {
-    #region StateManager
-    public List<EnemyState<BossControl>> enemyStates { get; private set; }
-    #endregion
     public Animator Animator{get; private set;}
     public Transform[] BossRoad;
-    public GameObject BossBullet;
-    public StateMachine<BossControl> StateMachine { get; private set; }
-    
-    public BossIdle BossIdle { get; private set; }
-    public BossRandomAction BossRandomAttack { get; private set; }
-    public BossAttack BossAttack { get; private set; }
-    public BossHold BossHold { get; private set; }
-    public BossFire BossFire { get; private set; }
+
+    public GameObject BossBullet_1;
+    public GameObject BossBullet_2;
+
+    public int HP = 500;
+    private SpriteRenderer sp;
+
+    BehaviourTree tree;
+    Selector sellector;
 
     public EnemyDATA enemyData;
     private void Awake()
     {
-        StateMachine = new StateMachine<BossControl>();
+        //StateMachine = new StateMachine<BossControl>();
         Animator = GetComponent<Animator>();
-        enemyStates = new List<EnemyState<BossControl>>();
+        sp = GetComponent<SpriteRenderer>();
+        tree = new BehaviourTree();
 
-
-        BossIdle = new BossIdle(this, StateMachine, enemyData, "Idle");
-        BossHold = new BossHold(this, StateMachine, enemyData, "Hold");
-        BossRandomAttack = new BossRandomAction(this, StateMachine, enemyData,"Random" );
-
-        BossAttack = new BossAttack(this, StateMachine, enemyData, "Attack");
-        BossFire = new BossFire(this, StateMachine, enemyData, "FIre");
-
-        
+        sellector = new Selector();
     }
 
     private void Start()
     {
-        enemyStates = new List<EnemyState<BossControl>>() {BossAttack, BossFire, BossFire };
+        Leaf ResetPosition = new Leaf(new ResetPosition(BossRoad, 1, 5f, gameObject),"Reset Position");
 
-        StateMachine.Initialize(BossIdle);
+  
+        Leaf attack1 = new Leaf(new Attack_1(5f, gameObject), "Attack 1");
+        Leaf attack2 = new Leaf(new Attack_2(3 , BossBullet_1, 1f), "Attack 2");
+        Leaf attack3 = new Leaf(new Attack_3(12, BossBullet_2, 5f), "Attack 3");
+
+
+        sellector.AddChild(attack1);
+        sellector.AddChild(attack3);
+        sellector.AddChild(attack2);
+
+        tree.AddChild(ResetPosition);
+        tree.AddChild(sellector);
+        
     }
 
     private void Update()
     {
-        StateMachine.currentEnemyState.Update();
-        
+        tree.Process();
     }
 
-    public void InsstantiateBullet()
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Instantiate(BossBullet, transform.position, Quaternion.identity);
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            GetHit();
+            print("Va chạm");
+        }
+    }
+
+    private void GetHit()
+    {
+        Animator.SetTrigger("Hit");
+        HP--;
+
     }
 }

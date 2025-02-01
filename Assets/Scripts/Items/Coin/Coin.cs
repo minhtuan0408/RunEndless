@@ -8,7 +8,8 @@ public class Coin : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            CoinPooling.Instance.ReturnPool(gameObject);
         }
     }
 
@@ -20,7 +21,7 @@ public class Coin : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, 12, transform.position.z);
             gameObject.SetActive(false);
-
+            CoinPooling.Instance.ReturnPool(gameObject);
         }
 
 

@@ -5,7 +5,9 @@ using static BulletPooling;
 
 public class PlayerFire : MonoBehaviour
 {
-    public float fireRate = 0.5f;
+    public float fireRate = 0.05f;
+    private float nextFireTime = 0f; 
+
 
     private int PinkBulletLevel;
     private int BlueBulletLevel;
@@ -26,16 +28,38 @@ public class PlayerFire : MonoBehaviour
         }
     }
 
+    //private void Update()
+    //{
+    //    if (Input.touchCount > 0 && Time.time >= nextFireTime) 
+    //    {
+    //        nextFireTime = Time.time + fireRate;
+    //        if (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved)
+    //        {
+    //            GameObject bullet = BulletPooling.Instance.GetBullet("Blue", bulletTypes[0]); 
+
+    //        }
+    //    }
+    //}
+
     private void Update()
     {
-        if (Input.touchCount > 0) 
+        if (Input.touchCount > 0)
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved)
+            // Kiểm tra nếu thời gian giữa các lần bắn đã qua
+            if (Time.time >= nextFireTime)
             {
-               
+                // Cập nhật thời gian bắn tiếp theo
+                nextFireTime = Time.time + fireRate;
 
-                GameObject bullet = BulletPooling.Instance.GetBullet("Blue", bulletTypes[0]); 
+                // Kiểm tra nếu người chơi đang chạm hoặc giữ ngón tay trên màn hình
+                Touch touch = Input.GetTouch(0);
 
+                if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                {
+                    // Lấy đạn từ pool (giả sử BulletPooling.Instance.GetBullet là phương thức trả về một đối tượng đạn)
+                    GameObject bullet = BulletPooling.Instance.GetBullet("Blue", bulletTypes[0]);
+                    bullet.transform.position = transform.position;
+                }
             }
         }
     }

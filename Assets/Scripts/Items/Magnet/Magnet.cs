@@ -18,7 +18,6 @@ public class Magnet : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
-           
             Vector3 direction = transform.position - other.transform.position;
             direction.Normalize();
 

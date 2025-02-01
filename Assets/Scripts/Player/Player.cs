@@ -44,12 +44,16 @@ public class Player : MonoBehaviour
 
     #region Skill
     private bool isShield = true;
-    public GameObject Shield;
+    private bool isMagenet = true;
 
+    public GameObject Shield;
     public GameObject Magnet;
 
-    #endregion
+    private Coroutine shieldCoroutine;
+    private Coroutine magnetCoroutine;
 
+
+    #endregion
 
     private PlayerState currentState;
     private PlayerHeart playerHeart;
@@ -60,7 +64,34 @@ public class Player : MonoBehaviour
 
     public Transform[] RoadPosition;
     private int index;
-    
+
+
+    #region Observer
+    // lưu tất cá các observer vào list này
+    private List<IObserverItem> observers = new List<IObserverItem>();
+
+    // thêm ob
+    public void AddObserver(IObserverItem obb)
+    {
+        observers.Add(obb);
+    }
+    // xóa ob
+    public void RemoveObserver(IObserverItem obb) 
+    {
+        observers.Remove(obb);
+    }
+
+    // thông báo cho tất cả các ob
+    public void NotifyObservers(ItemType type)
+    {
+        observers.ForEach((observers) =>
+        {
+            observers.OnNotify(type);
+        });
+    }
+
+    #endregion
+
     private void Awake()
     {
         transform.position = new Vector3(RoadPosition[1].position.x, RoadPosition[1].position.y, transform.position.z);
@@ -74,7 +105,6 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
-        FreeMove = false;
         mainCamera = Camera.main;
         int selectedSkinIndex = PlayerPrefs.GetInt("SelectedSkin", 0);
         animator.runtimeAnimatorController = animatorControllers[selectedSkinIndex];
@@ -92,7 +122,10 @@ public class Player : MonoBehaviour
             MoveIndex();
         }
     
+
     }
+
+    #region Move Function
     private int IndexToMoveLeft()
     {
         if (this.index > 0 && this.index < 3)
@@ -136,7 +169,7 @@ public class Player : MonoBehaviour
         }
         return this.index;
     }
-
+    #endregion
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -156,12 +189,22 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Magnet"))
         {
-            StartCoroutine(MagnetUsed(5f));
+            if (magnetCoroutine != null)
+            {
+                StopCoroutine(magnetCoroutine);
+            }
+            
+            magnetCoroutine = StartCoroutine(MagnetUsed(8f));
         }
 
         if (collision.gameObject.CompareTag("Shield"))
         {
-            StartCoroutine(ShieldUsed(5f));
+            if (shieldCoroutine != null)
+            {
+                StopCoroutine(shieldCoroutine);
+            }
+            shieldCoroutine = StartCoroutine(ShieldUsed(8f));
+            
         }
     }
 
@@ -180,15 +223,22 @@ public class Player : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8, 9, false);
     }
 
+
+     
     private IEnumerator MagnetUsed(float value)
     {
+        NotifyObservers(ItemType.Magnet);
         Magnet.SetActive(true);
+        isMagenet = true;
         yield return new WaitForSeconds(value);
+        isMagenet = false;
         Magnet.SetActive(false);
     }
 
+
     private IEnumerator ShieldUsed(float value) 
     {
+        NotifyObservers(ItemType.Shield);
         Shield.SetActive(true);
         isShield = true;
         yield return new WaitForSeconds(value);

@@ -99,7 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BossRoad: []
-  BossBullet: []
+  BossBullet: {fileID: 0}
+  sprite:
+  - {fileID: -7945901444079236628, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
   enemyData: {fileID: 0}
 --- !u!95 &2332324200394941646
 Animator:

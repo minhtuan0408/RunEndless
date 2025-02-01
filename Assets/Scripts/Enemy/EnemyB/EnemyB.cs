@@ -30,7 +30,6 @@ public class EnemyB : BaseEnemy
     } 
     private void Start()
     {
-        
         StateMachine.Initialize(EnemyB_Idle);
     }
 

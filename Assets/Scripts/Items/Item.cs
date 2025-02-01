@@ -7,6 +7,8 @@ public class Item : MonoBehaviour
     public float Speed = 1f;
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
+
         if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
