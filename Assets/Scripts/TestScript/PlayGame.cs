@@ -9,7 +9,17 @@ public class PlayGame : MonoBehaviour
     public float TimeChangeScene;
     public void NextLevel() 
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1 );
+        StartCoroutine(Play());
     }
 
+    public IEnumerator Play()
+    {
+        anim.SetTrigger("Action");
+        PlayerPrefs.SetInt("CurrentHP", 3);
+        PlayerPrefs.SetInt("CurrentScore", 0);
+        PlayerPrefs.Save();
+        yield return new WaitForSeconds(TimeChangeScene);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+    }
 }

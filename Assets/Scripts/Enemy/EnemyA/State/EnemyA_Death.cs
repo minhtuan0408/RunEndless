@@ -14,16 +14,13 @@ public class EnemyA_Death : EnemyState<EnemyA>
         enemy.StartCoroutine(ResetState());
     }
 
-    public override void Update()
-    {
-        
-    }
     IEnumerator ResetState() 
     {
-        yield return new WaitForSeconds(0.5f);
-        stateMachine.ChangeState(enemy.EnemyA_Idle);
+        yield return new WaitForSeconds(0.2f);
+        AudioManager.Instance.PlaySFX("EnemyDie");
         enemy.DeadAnimation.SetActive(false);
         enemy.ResetPos();
         enemy.TurnOff();
+        stateMachine.ChangeState(enemy.EnemyA_Idle);
     }
 }

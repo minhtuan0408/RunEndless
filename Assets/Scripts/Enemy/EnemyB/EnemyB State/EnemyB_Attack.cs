@@ -25,7 +25,6 @@ public class EnemyB_Attack : EnemyState<EnemyB>
 
     private void MoveAttack(float speed)
     {
-        enemy.transform.Translate(Vector2.down * speed *Time.deltaTime);
-        
+        enemy.transform.Translate(Vector2.down * speed *Time.deltaTime);  
     }
 }

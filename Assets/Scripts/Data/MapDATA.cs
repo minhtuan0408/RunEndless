@@ -7,20 +7,18 @@ public class MapDATA : ScriptableObject
 {
     public float SpeedTime = 0.7f;
 
-    public float Range;
-
     [Header("TOP")]
-    public float Speed_Top = 5f;
+    public float Speed_Top;
     
-    public Vector3 SpawnTranform_Top;
+
     
     [Header("MID")]
-    public float Speed_Mid = 3f;
+    public float Speed_Mid;
   
-    public Vector3 SpawnTranform_Mid;
+
 
     [Header("Bot")]
-    public float Speed_Bot = 1f;
+    public float Speed_Bot;
     
-    public Vector3 SpawnTranform_Bot;
+
 }

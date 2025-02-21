@@ -22,25 +22,39 @@ namespace BeehaviourTree
         private int index;
         private float speed;
         private GameObject boss;
+        private float Timing = 0;
+        private float waitTime;
 
-        public ResetPosition(Transform[] bossRoad, int index, float speed, GameObject boss)
+        public ResetPosition(Transform[] bossRoad, int index, float speed, GameObject boss, float waitTime)
         {
             this.bossRoad = bossRoad;
             this.index = index;
             this.speed = speed;
             this.boss = boss;
+            this.waitTime = waitTime;
         }
 
         public Status Process() 
         {
-            if (boss.transform.position == bossRoad[index].transform.position) return Status.Success;
+            if (boss.transform.position == bossRoad[index].transform.position)
+            {
+                Timing += Time.deltaTime;
+                if (Timing > waitTime) 
+                {
+                    return Status.Success;
+                }
+           
+                return Status.Running;
+            }
 
-            Vector2.MoveTowards(boss.transform.position, bossRoad[index].transform.position, speed);
+            boss.transform.position = Vector2.MoveTowards(boss.transform.position, bossRoad[index].transform.position, speed * Time.deltaTime);
             return Status.Running;
         }
 
         public void Reset() 
         {
+           
+            Timing = 0;
             index = Random.Range(0, bossRoad.Length);
         }
     }
@@ -56,6 +70,7 @@ namespace BeehaviourTree
         }
         public Status Process()
         {
+           
             if (boss.transform.position.y < -8)
             {
                 return Status.Success;
@@ -66,6 +81,7 @@ namespace BeehaviourTree
 
         public void Reset()
         {
+            
             boss.transform.position = new Vector3(0, 9, 0);
         }
     }
@@ -78,29 +94,34 @@ namespace BeehaviourTree
         private int cnt = 0;
         private float fireRate;
         private float currentTime;
-        public Attack_2(int amountBullet, GameObject BulletPreb, float fireRate) 
+
+        private GameObject boss;
+        public Attack_2(int amountBullet, GameObject BulletPreb, float fireRate, GameObject boss) 
         {
             this.amountBullet = amountBullet;
             this.Bullet = BulletPreb;
             this.fireRate = fireRate;
+            this.boss = boss;
             currentTime = Time.time;
         }
         public Status Process()
         {
-            if(cnt >= amountBullet)
+           
+            if (cnt >= amountBullet)
             {
                 return Status.Success;
             }
             if(Time.time > currentTime)
             {
-                GameObject InsBullet = GameObject.Instantiate(Bullet);
+                AudioManager.Instance.PlaySFX("BossFire2");
+                GameObject InsBullet = GameObject.Instantiate(Bullet, boss.transform.position, Quaternion.identity);
                 cnt++;
                 currentTime = Time.time + fireRate;    
             }
             return Status.Running;
         }
         public void Reset() {
-            UnityEngine.Debug.Log("het attack 2");
+         
         }
     }
 
@@ -114,22 +135,26 @@ namespace BeehaviourTree
 
         private float angleStep;
         private float angle = 0;
-        public Attack_3(int amountBullet, GameObject BulletPreb, float speed)
+
+        private GameObject boss;
+        public Attack_3(int amountBullet, GameObject BulletPreb, float speed, GameObject boss)
         {
             this.speed = speed;
             this.amountBullet = amountBullet;
             this.Bullet = BulletPreb;
             angleStep = 360 / amountBullet;
+            this.boss = boss;
         }
         public Status Process()
         {
+            AudioManager.Instance.PlaySFX("BossFire1");
             for (int i = 0; i < amountBullet; i++)
             {
                 float radian = angle * Mathf.Deg2Rad;
 
                 Vector2 bulletDirection = new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
 
-                GameObject bulletInstance = GameObject.Instantiate(Bullet);
+                GameObject bulletInstance = GameObject.Instantiate(Bullet, boss.transform.position, Quaternion.identity);
 
                 Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
 
@@ -142,7 +167,7 @@ namespace BeehaviourTree
             return Status.Success;
         }
         public void Reset() {
-            UnityEngine.Debug.Log("het attack 3");
+          
         }
     }
 }

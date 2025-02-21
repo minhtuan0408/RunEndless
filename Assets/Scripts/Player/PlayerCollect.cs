@@ -6,13 +6,12 @@ using UnityEngine.UI;
 public class PlayerCollect : MonoBehaviour
 {
     public Text TextScore;
-    private int Score;
+    public int Score;
 
 
     private void Awake()
     {
-        
-        Score = 0;
+        Score = PlayerPrefs.GetInt("CurrentScore", 0);
     }
 
     private void Start()

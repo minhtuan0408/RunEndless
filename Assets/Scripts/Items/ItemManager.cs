@@ -19,7 +19,7 @@ public class ItemManager : MonoBehaviour
         {
             int randomItem = Random.Range(0, Item.Length);
             Instantiate(Item[randomItem], ItemSpawn[randomPosition].transform.position, Quaternion.identity);
-            int randomTime = Random.Range(4,7);
+            int randomTime = Random.Range(3,5);
             yield return new WaitForSeconds(randomTime);
 
             randomPosition = Random.Range(0, ItemSpawn.Length);

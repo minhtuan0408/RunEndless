@@ -21,6 +21,7 @@ namespace BeehaviourTree
 
         public virtual Status Process() => children[currentChild].StatusChild;
         
+     
         public virtual void Reset()
         {
             currentChild = 0;
@@ -66,7 +67,13 @@ namespace BeehaviourTree
         }
         public override void Reset() 
         {
+            tick = false;
             cnt = Random.Range(0, children.Count);
+            foreach (Node child in children)
+            {
+                child.Reset();
+            }
+        
         }
     }
 

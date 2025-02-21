@@ -11,11 +11,12 @@ TagManager:
   - Shield
   - Magnet
   - Boss
+  - Port
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Port
   - Water
   - UI
   - Road
@@ -24,8 +25,8 @@ TagManager:
   - Player
   - Coin
   - Item
-  - 
-  - 
+  - Wall
+  - Skill
   - 
   - 
   - 
@@ -68,4 +69,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3270517079
+    locked: 0
+  - name: Port
+    uniqueID: 1832317899
     locked: 0

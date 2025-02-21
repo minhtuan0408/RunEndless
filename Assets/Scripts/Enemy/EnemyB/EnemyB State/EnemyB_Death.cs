@@ -12,13 +12,14 @@ public class EnemyB_Death : EnemyState<EnemyB>
     {
         base.Enter();
         enemy.StartCoroutine(ResetState());
-        Debug.Log("Death");
+
     }
 
     IEnumerator ResetState()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         stateMachine.ChangeState(enemy.EnemyB_Idle);
+        AudioManager.Instance.PlaySFX("EnemyDie");
         enemy.DeadAnimation.SetActive(false);
         enemy.ResetPos();
         enemy.TurnOff();

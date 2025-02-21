@@ -6,28 +6,50 @@ public class GameManager : MonoBehaviour
 {
     public GameObject Enemies;
     public GameObject Boss;
+    public GameObject Player;
+    public GameObject LoadNextLevel;
+
+    private PlayerCollect playerCollect;
+    private Player player;
 
     private bool canSpawnEnemies;
-    private bool canSpawnBoss;
+    private bool canLoadNextLevel;
 
+    private void Awake()
+    {
+        AudioManager.Instance.PlayMusic("Playing Theme");
+    }
     private void Start()
     {
-        canSpawnBoss = true;
+        playerCollect = Player.GetComponent<PlayerCollect>();
+        player = Player.GetComponent<Player>();
         canSpawnEnemies = true;
+        if (PlayerPrefs.GetInt("CurrentScore") < 50)
+        {
+            canLoadNextLevel = true;
+        } 
+        canLoadNextLevel = true;
     }
     void Update()
     {
-        if (Time.time > 10 && canSpawnEnemies == true)
+        if (Time.time > 10 && canSpawnEnemies == true )
         {
             canSpawnEnemies = false;
             Enemies.SetActive(true);
         }
-        if (Time.time > 30 && canSpawnBoss == true)
+
+        if (Time.time > 50 && canLoadNextLevel == true)
         {
-            canSpawnBoss = false;
-            Boss.SetActive(true);
+            canLoadNextLevel = false;
+            LoadNextLevel.SetActive(true);
         }
-        
-        
+
+    }
+
+    private IEnumerator Port()
+    {
+ 
+        Enemies.SetActive(false);
+        yield return new WaitForSeconds(5f);
     }
 }

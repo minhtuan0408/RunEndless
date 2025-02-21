@@ -40,8 +40,9 @@ public class EnemyB : BaseEnemy
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("Shield") || collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Death");
             DeadAnimation.SetActive(true);
             StateMachine.ChangeState(EnemyB_Death);
         }

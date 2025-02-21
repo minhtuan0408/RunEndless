@@ -13,10 +13,6 @@ MonoBehaviour:
   m_Name: MapDATA
   m_EditorClassIdentifier: 
   SpeedTime: 0.7
-  Range: -36
-  Speed_Top: 5
-  SpawnTranform_Top: {x: 0, y: 24, z: -2}
-  Speed_Mid: 3
-  SpawnTranform_Mid: {x: 0, y: 24, z: -3}
-  Speed_Bot: 1
-  SpawnTranform_Bot: {x: 0, y: 24, z: -4}
+  Speed_Top: 0.25
+  Speed_Mid: 0.2
+  Speed_Bot: 0.15

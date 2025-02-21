@@ -60,7 +60,7 @@ public class BulletPooling : MonoBehaviour
             if ( bullet.Count > 0) 
             {
                 GameObject Bullet = bullet.Dequeue();
-                print(bullet.Count);
+                
                 Bullet.SetActive(true);
                 return Bullet;
             }

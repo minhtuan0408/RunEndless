@@ -17,4 +17,13 @@ public class BlueBullet : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Boss"))
+        {
+            transform.position = new Vector2(0, 0);
+            gameObject.SetActive(false);
+            BulletPooling.Instance.ReturnPool(gameObject, "Blue");
+        }
+    }
 }

@@ -51,12 +51,12 @@ public class PlayerFire : MonoBehaviour
                 // Cập nhật thời gian bắn tiếp theo
                 nextFireTime = Time.time + fireRate;
 
-                // Kiểm tra nếu người chơi đang chạm hoặc giữ ngón tay trên màn hình
+
                 Touch touch = Input.GetTouch(0);
 
                 if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
                 {
-                    // Lấy đạn từ pool (giả sử BulletPooling.Instance.GetBullet là phương thức trả về một đối tượng đạn)
+                    AudioManager.Instance.PlaySFX("Shoot");
                     GameObject bullet = BulletPooling.Instance.GetBullet("Blue", bulletTypes[0]);
                     bullet.transform.position = transform.position;
                 }

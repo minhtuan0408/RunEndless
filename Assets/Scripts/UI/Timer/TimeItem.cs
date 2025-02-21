@@ -79,7 +79,14 @@ public class TimeItem : MonoBehaviour, IObserverItem
             CurrentTime = SkillData.TimeEffectMagnet;
             gameObject.SetActive(true);
        }
+    }
 
+    public void OffNotify(ItemType type)
+    {
+        if (type == Type)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
 }
