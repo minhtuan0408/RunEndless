@@ -17,7 +17,7 @@ public class EnemyB_Death : EnemyState<EnemyB>
 
     IEnumerator ResetState()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         stateMachine.ChangeState(enemy.EnemyB_Idle);
         AudioManager.Instance.PlaySFX("EnemyDie");
         enemy.DeadAnimation.SetActive(false);

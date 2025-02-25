@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject Enemies;
-    public GameObject Boss;
     public GameObject Player;
     public GameObject LoadNextLevel;
 
@@ -38,18 +37,6 @@ public class GameManager : MonoBehaviour
             Enemies.SetActive(true);
         }
 
-        if (Time.time > 50 && canLoadNextLevel == true)
-        {
-            canLoadNextLevel = false;
-            LoadNextLevel.SetActive(true);
-        }
-
     }
 
-    private IEnumerator Port()
-    {
- 
-        Enemies.SetActive(false);
-        yield return new WaitForSeconds(5f);
-    }
 }

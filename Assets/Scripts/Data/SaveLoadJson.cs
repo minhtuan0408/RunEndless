@@ -1,38 +1,30 @@
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
-
-
-[System.Serializable]
-public class Skin
-{
-    public string skinName;
-    public int price;
-    public bool isUnlocked;
-}
-
-public class Skill
-{
-    public string name;
-    public int price;
-    public int level;
-}
-
-[System.Serializable]
-public class ShopData
-{
-    public List<Skin> skinList = new List<Skin>();
-    public List<Skill> skillList = new List<Skill>();
-}
 
 public class SaveLoadJson : MonoBehaviour
 {
-    string path;
-    private ShopData data;
+    public static SaveLoadJson Instance;
+    #region Shop
+    public ShopData shopData;
+    public string path;
+    public TextMeshProUGUI TextNofication;
+    #endregion
+
+    #region Skin Select
+    public GameObject[] Skin;
+    #endregion
+    private void Awake()
+    {
+        Instance = this;
+        path = Application.persistentDataPath + "/saveShopData.json";
+    }
     void Start()
     {
-        path = Application.persistentDataPath + "/saveShopData.txt";
+        
+
+        
         if (File.Exists(path))
         {
             LoadShopData();
@@ -44,30 +36,41 @@ public class SaveLoadJson : MonoBehaviour
         }
     }
 
-    public void InitializeGame() {
-        ShopData data = new ShopData();
-        data.skinList.Add(new Skin { skinName = "Skin 1", isUnlocked = true, price = 1  } );
-        data.skinList.Add(new Skin { skinName = "Skin 2", isUnlocked = false, price = 100 });
-        data.skinList.Add(new Skin { skinName = "Skin 3", isUnlocked = false, price = 100 });
+    public void InitializeGame()
+    {
+        // Khởi tạo dữ liệu ban đầu
+        shopData.shopItems = new ItemList
+        {
+            skinList = new List<Skin>
+            {
+                new Skin { skinName = "Skin 1", isUnlocked = true, price = 1 },
+                new Skin { skinName = "Skin 2", isUnlocked = false, price = 100 },
+                new Skin { skinName = "Skin 3", isUnlocked = false, price = 100 }
+            },
+            skillList = new List<Skill>
+            {
+                new Skill { name = "Magnet", price = 30, level = 1 },
+                new Skill { name = "Shield", price = 30, level = 1 }
+            }
+        };
 
-        data.skillList.Add(new Skill { name = "Magnet", price = 30, level = 1 });
-        data.skillList.Add(new Skill { name = "Shield", price = 30, level = 1 });
-
+        shopData.Coin = 0;
         Debug.Log("Game Initialized!");
     }
 
-    void SaveShopData()
+    public void SaveShopData()
     {
-        string json = JsonUtility.ToJson(data, true);
+        string json = JsonUtility.ToJson(shopData, true);
         File.WriteAllText(path, json);
 
-        Debug.Log("Shop Data Saved!");
+        Debug.Log("Shop Data Saved at: " + path);
     }
-    void LoadShopData()
+
+    public void LoadShopData()
     {
         string json = File.ReadAllText(path);
-        data = JsonUtility.FromJson<ShopData>(json);
-
+        JsonUtility.FromJsonOverwrite(json,shopData);
+        TextNofication.text = shopData.Coin.ToString();
         Debug.Log("Shop Data Loaded!");
     }
 }

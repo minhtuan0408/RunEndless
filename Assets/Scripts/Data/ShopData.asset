@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b545520503ee7b42beeffd6c5d9e390, type: 3}
+  m_Name: ShopData
+  m_EditorClassIdentifier: 
+  shopItems:
+    skinList:
+    - skinName: Skin 1
+      price: 1
+      isUnlocked: 1
+    - skinName: Skin 2
+      price: 100
+      isUnlocked: 1
+    - skinName: Skin 3
+      price: 100
+      isUnlocked: 1
+    skillList:
+    - name: Magnet
+      price: 30
+      level: 1
+    - name: Shield
+      price: 30
+      level: 1
+  Coin: 99

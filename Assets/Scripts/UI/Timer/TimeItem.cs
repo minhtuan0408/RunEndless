@@ -14,7 +14,7 @@ public enum ItemType
 public class TimeItem : MonoBehaviour, IObserverItem
 {
     public ItemType Type;
-    public SkillData SkillData;
+    public PlayerData PlayerData;
 
     public float TimeLimit;
     public float CurrentTime;
@@ -42,12 +42,12 @@ public class TimeItem : MonoBehaviour, IObserverItem
         switch (Type)
         {
             case ItemType.Magnet:
-                TimeLimit = SkillData.TimeEffectMagnet;
-                CurrentTime = SkillData.TimeEffectMagnet;
+                TimeLimit = PlayerData.TimeMagnet;
+                CurrentTime = PlayerData.TimeMagnet;
                 break;
             case ItemType.Shield:
-                TimeLimit = SkillData.TimeEffectShield;
-                CurrentTime = SkillData.TimeEffectShield;
+                TimeLimit = PlayerData.TimeShield;
+                CurrentTime = PlayerData.TimeShield;
                 break;
             default:
                 TimeLimit = 500f;
@@ -76,7 +76,7 @@ public class TimeItem : MonoBehaviour, IObserverItem
        if (type == Type)
        {
             Debug.Log("Kich hoat" + type.ToString());
-            CurrentTime = SkillData.TimeEffectMagnet;
+            CurrentTime = PlayerData.TimeMagnet;
             gameObject.SetActive(true);
        }
     }

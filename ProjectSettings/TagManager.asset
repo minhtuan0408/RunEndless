@@ -12,6 +12,7 @@ TagManager:
   - Magnet
   - Boss
   - Port
+  - Port Item
   layers:
   - Default
   - TransparentFX

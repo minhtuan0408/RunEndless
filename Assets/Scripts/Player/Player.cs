@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -70,7 +71,7 @@ public class Player : MonoBehaviour
     private PlayerHeart playerHeart;
     private SpriteRenderer spriteRenderer;
     private int Heart;
-
+    
     private new Rigidbody2D rigidbody2D;
     private Player player;
     private PlayerCollect Gold;
@@ -275,8 +276,13 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(BossChangeScene());
         }
+
     }
 
+    public void ShowItem()
+    {
+
+    }
     public IEnumerator BossChangeScene()
     {
         animator.SetTrigger("Dead");
