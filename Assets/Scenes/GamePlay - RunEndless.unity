@@ -2709,7 +2709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
-  SkillData: {fileID: 11400000, guid: 2f93b16682bb85946a265fcf279d22a0, type: 2}
+  PlayerData: {fileID: 11400000, guid: 5c4363b4f5d344e49af0d009ad056e93, type: 2}
   TimeLimit: 0
   CurrentTime: 0
   timeFill: {fileID: 986940175}
@@ -3838,6 +3838,7 @@ MonoBehaviour:
   Magnet: {fileID: 942791361}
   PlayerFire: {fileID: 309630087}
   CameraShake: {fileID: 519420028}
+  PlayerData: {fileID: 11400000, guid: 5c4363b4f5d344e49af0d009ad056e93, type: 2}
   RoadPosition:
   - {fileID: 2082533536}
   - {fileID: 885384277}
@@ -4980,7 +4981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
-  SkillData: {fileID: 11400000, guid: 2f93b16682bb85946a265fcf279d22a0, type: 2}
+  PlayerData: {fileID: 11400000, guid: 5c4363b4f5d344e49af0d009ad056e93, type: 2}
   TimeLimit: 0
   CurrentTime: 0
   timeFill: {fileID: 2147390826}

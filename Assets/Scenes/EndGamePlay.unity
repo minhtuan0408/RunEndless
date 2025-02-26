@@ -344,6 +344,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1770456783}
   TimeChangeScene: 1
+  path: 
+  ShopData: {fileID: 11400000, guid: 836aa1a9aededc5408769ae39d6d78c1, type: 2}
 --- !u!1 &64392785
 GameObject:
   m_ObjectHideFlags: 0

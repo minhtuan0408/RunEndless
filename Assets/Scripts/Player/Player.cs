@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    public PlayerData PlayerData;
     private PlayerState currentState;
     private PlayerHeart playerHeart;
     private SpriteRenderer spriteRenderer;
@@ -258,7 +259,7 @@ public class Player : MonoBehaviour
 
             }
             AudioManager.Instance.PlaySFX("Got Item");
-            magnetCoroutine = StartCoroutine(MagnetUsed(8f));
+            magnetCoroutine = StartCoroutine(MagnetUsed(PlayerData.TimeMagnet));
         }
 
         if (collision.gameObject.CompareTag("Shield"))
@@ -268,7 +269,7 @@ public class Player : MonoBehaviour
                 StopCoroutine(shieldCoroutine);
             }
             AudioManager.Instance.PlaySFX("Got Item");
-            shieldCoroutine = StartCoroutine(ShieldUsed(8f));
+            shieldCoroutine = StartCoroutine(ShieldUsed(PlayerData.TimeShield));
             
         }
 
@@ -299,6 +300,9 @@ public class Player : MonoBehaviour
 
     IEnumerator EndGame()
     {
+        PlayerPrefs.SetInt("CurrentHP", playerHeart.HeartCount);
+        PlayerPrefs.SetInt("CurrentScore", Gold.Score);
+        PlayerPrefs.Save();
         animator.SetTrigger("Dead");
         player.enabled = false;
         capsuleCollider2D.enabled = false;

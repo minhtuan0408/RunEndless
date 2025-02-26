@@ -8,6 +8,7 @@ public class PlayerData : ScriptableObject
     [Header("Skin")]
     public AnimatorOverrideController[] AnimatorOverride;
     public int Skin;
+
     [Header("Skill")]
     public float TimeMagnet;
     public float TimeShield;

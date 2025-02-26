@@ -41,7 +41,7 @@ public class CoinReward1 : MonoBehaviour
         yield return new WaitForSeconds(1);
         Debug.Log("Chạy Coin");
         float timeSpawn = 2f/CoinPool.childCount;
-        print(CoinPool.childCount);
+
         for (int i = 0; i < CoinPool.childCount; i++)
         {
             {
@@ -67,5 +67,6 @@ public class CoinReward1 : MonoBehaviour
             yield return null;
         }
 
+        coin.gameObject.SetActive(false);
     }
 }

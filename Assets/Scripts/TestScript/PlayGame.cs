@@ -7,8 +7,13 @@ public class PlayGame : MonoBehaviour
 {
     public Animator anim;
     public float TimeChangeScene;
+
+    public ShopData shopData;
+
+    public PlayerData playerData;
     public void NextLevel() 
     {
+        UpdateData();
         StartCoroutine(Play());
     }
 
@@ -21,5 +26,11 @@ public class PlayGame : MonoBehaviour
         yield return new WaitForSeconds(TimeChangeScene);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
+    }
+
+    private void UpdateData()
+    {
+        playerData.TimeMagnet = 4 + shopData.shopItems.skillList[0].level;
+        playerData.TimeShield = 4 + shopData.shopItems.skillList[1].level;
     }
 }

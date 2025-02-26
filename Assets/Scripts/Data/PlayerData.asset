@@ -15,3 +15,6 @@ MonoBehaviour:
   AnimatorOverride:
   - {fileID: 22100000, guid: 2f31d56218e79ec46b6e2cbcb221342a, type: 2}
   - {fileID: 22100000, guid: 8fdd5515f4d5ac44390c941a44389215, type: 2}
+  Skin: 0
+  TimeMagnet: 5
+  TimeShield: 5

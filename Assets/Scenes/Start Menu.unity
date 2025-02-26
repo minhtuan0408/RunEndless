@@ -343,9 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisSystem: {fileID: 105222467}
-  GameObjects:
-  - {fileID: 0}
-  - {fileID: 2065065749}
+  GameObjects: []
 --- !u!114 &105222470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1963,9 +1961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisSystem: {fileID: 1084596977}
-  GameObjects:
-  - {fileID: 0}
-  - {fileID: 2065065749}
+  GameObjects: []
 --- !u!114 &1084596980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3380,6 +3376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 64333441}
   TimeChangeScene: 1
+  shopData: {fileID: 11400000, guid: 836aa1a9aededc5408769ae39d6d78c1, type: 2}
+  playerData: {fileID: 11400000, guid: 5c4363b4f5d344e49af0d009ad056e93, type: 2}
 --- !u!1 &1870923043
 GameObject:
   m_ObjectHideFlags: 0
