@@ -5,30 +5,32 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NextLevel : MonoBehaviour
-{
-    public float Speed = 3f;
-    private bool canMove = false;
+{ 
 
     public Animator animator;
-    private void Start()
+
+    public SpriteRenderer Sprite;
+    private void Awake()
     {
-        canMove = false;
-        StartCoroutine(Counting());
+        Sprite = GetComponent<SpriteRenderer>();
     }
 
-    IEnumerator Counting()
+
+    private void OnEnable()
     {
-        yield return new WaitForSeconds(3f);
-        canMove = true;
+        StartCoroutine(AppearPort(3f));
     }
 
-    private void Update()
+    IEnumerator AppearPort(float time)
     {
-        if (canMove && transform.position.y >= - 4.8f) 
+        float timeElapsed = 0f;
+        while (timeElapsed < time)
         {
-            transform.position += Vector3.down * Speed * Time.deltaTime;
+            float alpha = timeElapsed / time ;
+            Sprite.color = new Color(1f, 1f, 1f, alpha);
+            timeElapsed += Time.deltaTime;
+            yield return null;
         }
+        yield return null;
     }
-
-    
 }

@@ -9,7 +9,7 @@ public class EnemyB_Attack : EnemyState<EnemyB>
     public override void Enter()
     {
         base.Enter();
-        
+        Debug.Log("EnemyB Attack");
     }
     public override void Update()
     {

@@ -19,7 +19,7 @@ public class EnemyA_Idle : EnemyState<EnemyA>
     {
         base.Update();
         enemy.transform.position = Vector2.MoveTowards(enemy.transform.position, enemy.RoadPosition[RandomRoad].transform.position, 5f * Time.deltaTime);
-        if (enemy.transform.position.y == enemy.RoadPosition[RandomRoad].transform.position.y) 
+        if  (enemy.transform.position.y - enemy.RoadPosition[RandomRoad].transform.position.y < .2) 
         {
             
             stateMachine.ChangeState(enemy.EnemyA_Fire);

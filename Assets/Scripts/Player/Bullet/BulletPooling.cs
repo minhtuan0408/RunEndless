@@ -29,7 +29,7 @@ public class BulletPooling : MonoBehaviour
         }
         else
         {
-            Destroy(Instance);
+            Destroy(gameObject);
         }
 
 
@@ -60,12 +60,12 @@ public class BulletPooling : MonoBehaviour
             if ( bullet.Count > 0) 
             {
                 GameObject Bullet = bullet.Dequeue();
-                
+                Debug.Log(bullet.Count);
                 Bullet.SetActive(true);
                 return Bullet;
             }
-
-            GameObject newBullet = Instantiate(type.prefab, transform);
+            Debug.Log(bullet.Count);
+            GameObject newBullet = Instantiate(bulletList[1].prefab, transform);
             return newBullet;
         }
         return null;

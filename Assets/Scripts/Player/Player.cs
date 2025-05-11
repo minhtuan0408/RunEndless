@@ -232,15 +232,16 @@ public class Player : MonoBehaviour
         {
             if (!isShield)
             {
-                playerHeart.HeartImage[playerHeart.HeartCount - 1].SetActive(false);
-                playerHeart.HeartCount--;
-                shake.SetTrigger("Shake");
-                AudioManager.Instance.PlaySFX("PlayerGetDame");
                 if (playerHeart.HeartCount < 1)
                 {
                     StartCoroutine(EndGame());
                 }
                 StartCoroutine(TakedDamege(2f));
+                playerHeart.HeartImage[playerHeart.HeartCount - 1].SetActive(false);
+                playerHeart.HeartCount--;
+                shake.SetTrigger("Shake");
+                AudioManager.Instance.PlaySFX("PlayerGetDame");
+
             }
             else if (isShield)
             {
@@ -273,30 +274,9 @@ public class Player : MonoBehaviour
             
         }
 
-        if (collision.gameObject.CompareTag("Port"))
-        {
-            StartCoroutine(BossChangeScene());
-        }
 
     }
 
-    public void ShowItem()
-    {
-
-    }
-    public IEnumerator BossChangeScene()
-    {
-        animator.SetTrigger("Dead");
-        player.enabled = false;
-        PlayerPrefs.SetInt("CurrentHP", playerHeart.HeartCount);
-        PlayerPrefs.SetInt("CurrentScore", Gold.Score);
-        PlayerPrefs.Save();
-        Debug.Log(PlayerPrefs.GetInt("CurrentScore", Gold.Score));
-        animator.SetTrigger("Action");
-        yield return new WaitForSeconds(1f);
-        AudioManager.Instance.PlayMusic("Boss Theme");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
 
     IEnumerator EndGame()
     {

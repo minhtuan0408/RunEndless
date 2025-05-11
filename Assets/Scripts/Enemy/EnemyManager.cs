@@ -2,19 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
     public GameObject[] Enemy;
     
-
+    
     private int amountSpawn;
 
     private bool canSpawn;
 
+
+
     private void Awake()
     {
         canSpawn = true;
+
     }
 
     private void Update()
@@ -24,6 +28,7 @@ public class EnemyManager : MonoBehaviour
             StartCoroutine(SpawnEnemy());
         }
     }
+
 
     private IEnumerator SpawnEnemy()
     {
