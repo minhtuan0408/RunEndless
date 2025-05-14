@@ -60,11 +60,11 @@ public class BulletPooling : MonoBehaviour
             if ( bullet.Count > 0) 
             {
                 GameObject Bullet = bullet.Dequeue();
-                Debug.Log(bullet.Count);
+
                 Bullet.SetActive(true);
                 return Bullet;
             }
-            Debug.Log(bullet.Count);
+
             GameObject newBullet = Instantiate(bulletList[1].prefab, transform);
             return newBullet;
         }

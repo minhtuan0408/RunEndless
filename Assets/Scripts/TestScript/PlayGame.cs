@@ -11,6 +11,8 @@ public class PlayGame : MonoBehaviour
     public ShopData shopData;
 
     public PlayerData playerData;
+
+   
     public void NextLevel() 
     {
         UpdateData();
@@ -24,8 +26,7 @@ public class PlayGame : MonoBehaviour
         PlayerPrefs.SetInt("CurrentScore", 0);
         PlayerPrefs.Save();
         yield return new WaitForSeconds(TimeChangeScene);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
+        MapLevelUIManager.instance.LoadThisLevel();
     }
 
     private void UpdateData()

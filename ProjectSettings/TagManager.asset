@@ -12,7 +12,10 @@ TagManager:
   - Magnet
   - Boss
   - Port
+  - Screw
   - Port Item
+  - Screwdrive
+  - Wrench
   layers:
   - Default
   - TransparentFX

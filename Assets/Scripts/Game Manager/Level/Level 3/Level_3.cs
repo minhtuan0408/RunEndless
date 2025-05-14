@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Level_1 : GameManager
+public class Level_3 : GameManager
 {
     public GameObject EnemiesManager;
     private bool canSpawnEnemies;
@@ -19,9 +19,7 @@ public class Level_1 : GameManager
     private bool isTiming;
     public float TimeToEnd;
 
-    public GameObject NextLevel;
 
-    public PlayerLevel1ActionPlus PlayerLevel1ActionPlus;
 
 
     public override void Awake()
@@ -38,13 +36,12 @@ public class Level_1 : GameManager
     }
     public override void Update()
     {
-        
+
         if (Time.time > TimeIN + 10 && canSpawnEnemies == true)
         {
             canSpawnEnemies = false;
             EnemiesManager.SetActive(true);
             ItemManager.SetActive(true);
-            CoinManager.SetActive(true);
         }
         if (isTiming)
         {
@@ -63,31 +60,15 @@ public class Level_1 : GameManager
             CoinManager.SetActive(false);
             isTiming = false;
 
-            StartCoroutine(LoadNextLevel(3,3));
-            PlayerLevel1ActionPlus.PlayerOff();
+            StartCoroutine(LoadNextLevel());
         }
     }
 
     // Time = Time cổng xuất hiện
-    private IEnumerator LoadNextLevel(float totalTime, int shakeTime)
+    private IEnumerator LoadNextLevel()
     {
-        float interval = totalTime / shakeTime;
-
-        StartCoroutine(PlayerLevel1ActionPlus.ResetPos());
-
-        for (int i = 0; i < shakeTime; i++)
-        {
-            shake.SetTrigger("Shake");
-            yield return new WaitForSeconds(interval);
-        }
-
-        yield return new WaitForSeconds(interval);
-
-        NextLevel.SetActive(true);
-
         yield return new WaitForSeconds(4f);
-
-        StartCoroutine(PlayerLevel1ActionPlus.MoveUp());
+        Debug.Log("End game");
     }
 
 
