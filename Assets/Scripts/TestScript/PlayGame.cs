@@ -26,6 +26,7 @@ public class PlayGame : MonoBehaviour
         PlayerPrefs.SetInt("CurrentScore", 0);
         PlayerPrefs.Save();
         yield return new WaitForSeconds(TimeChangeScene);
+        
         MapLevelUIManager.instance.LoadThisLevel();
     }
 

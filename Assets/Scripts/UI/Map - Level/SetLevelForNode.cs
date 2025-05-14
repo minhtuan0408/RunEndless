@@ -15,8 +15,8 @@ public class SetLevelForNode : MonoBehaviour
     public void ThisLevel()
     {
         MapLevelUIManager.instance.index = Index;
+        print(MapLevelUIManager.instance.index);
         PlayerChosse.SetParent(transform, true);
-        Debug.Log("Chạy phần này");
 
         if (moveCoroutine != null)
         {

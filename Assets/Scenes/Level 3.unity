@@ -2519,8 +2519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5dada749b00024459cafc44d67a3f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2.5
-  maxHealth: 5
+  moveSpeed: 5
+  maxHealth: 10
   canShoot: 0
   bulletPrefab: {fileID: 6258965276458535650, guid: a2a38c861f3f8914c95701c985d7f685, type: 3}
   firePoint: {fileID: 1079033022}
@@ -4076,8 +4076,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5dada749b00024459cafc44d67a3f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
-  maxHealth: 2
+  moveSpeed: 3
+  maxHealth: 4
   canShoot: 0
   bulletPrefab: {fileID: 6258965276458535650, guid: a2a38c861f3f8914c95701c985d7f685, type: 3}
   firePoint: {fileID: 1705361465}
@@ -4926,8 +4926,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5dada749b00024459cafc44d67a3f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  maxHealth: 10
+  moveSpeed: 2
+  maxHealth: 20
   canShoot: 1
   bulletPrefab: {fileID: 6258965276458535650, guid: a2a38c861f3f8914c95701c985d7f685, type: 3}
   firePoint: {fileID: 2011907119}
