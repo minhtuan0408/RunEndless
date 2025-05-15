@@ -78,7 +78,7 @@ public class BossControl : BaseEnemy
         if (collision.gameObject.CompareTag("Bullet"))
         {
             GetHit();
-            print("Va chạm");
+
         }
     }
 
@@ -129,6 +129,8 @@ public class BossControl : BaseEnemy
 
     void EndBoss()
     {
+        Level_1_2.Instance.SaveCurrentScore();
+        Level_1_2.Instance.SaveCurrentHP();
         SceneManager.LoadScene("EndGamePlay");
     }
 

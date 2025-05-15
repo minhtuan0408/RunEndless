@@ -64,10 +64,12 @@ public class Level_3 : GameManager
         }
     }
 
-    // Time = Time cổng xuất hiện
+
     private IEnumerator LoadNextLevel()
     {
         yield return new WaitForSeconds(4f);
+        SaveCurrentScore();
+        SaveCurrentHP();
         Debug.Log("End game");
     }
 

@@ -87,6 +87,8 @@ public class Level_1 : GameManager
 
         yield return new WaitForSeconds(4f);
 
+        SaveCurrentScore();
+        SaveCurrentHP();
         StartCoroutine(PlayerLevel1ActionPlus.MoveUp());
     }
 

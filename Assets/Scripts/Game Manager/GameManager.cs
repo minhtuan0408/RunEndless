@@ -9,8 +9,10 @@ public class GameManager : MonoBehaviour
     public GameObject Player;
     public PlayerCollect playerCollect;
     public Player player;
-
+    public PlayerHeart playerHeart;
     public Animator shake;
+
+    public DataCollected DataCollected;
     #endregion
 
     public virtual void Awake()
@@ -21,11 +23,15 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.Instance.PlayMusic("Playing Theme");
         playerCollect = Player.GetComponent<PlayerCollect>();
+        playerHeart = Player.GetComponent<PlayerHeart>();
         player = Player.GetComponent<Player>();
+
     }
     public virtual void Update()
     {
 
     }
-    
+
+    public void SaveCurrentScore() => DataCollected.SavePrefData("CurrentScore", playerCollect.Score);
+    public void SaveCurrentHP() => DataCollected.SavePrefData("CurrentHP", playerHeart.HeartCount);
 }

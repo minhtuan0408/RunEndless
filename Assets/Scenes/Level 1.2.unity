@@ -122,6 +122,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &13332618
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 869834323556234068, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.1808414
+      objectReference: {fileID: 0}
+    - target: {fileID: 869834323556234068, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.5675454
+      objectReference: {fileID: 0}
+    - target: {fileID: 869834323556234068, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8906.428
+      objectReference: {fileID: 0}
+    - target: {fileID: 869834323556234068, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 869834323556234068, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 869834323556234068, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 869834323556234068, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 869834323556234068, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 869834323556234068, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 869834323556234068, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5566323521476015905, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
+      propertyPath: m_Name
+      value: Data Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
 --- !u!1 &27096693
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,15 +340,15 @@ PrefabInstance:
     - target: {fileID: 4345359237367421705, guid: 13c5aac97a67d854bb54745b2dd57ea3, type: 3}
       propertyPath: HeartImage.Array.data[0]
       value: 
-      objectReference: {fileID: 759916012}
+      objectReference: {fileID: 45059457}
     - target: {fileID: 4345359237367421705, guid: 13c5aac97a67d854bb54745b2dd57ea3, type: 3}
       propertyPath: HeartImage.Array.data[1]
       value: 
-      objectReference: {fileID: 1523982304}
+      objectReference: {fileID: 775148012}
     - target: {fileID: 4345359237367421705, guid: 13c5aac97a67d854bb54745b2dd57ea3, type: 3}
       propertyPath: HeartImage.Array.data[2]
       value: 
-      objectReference: {fileID: 882076427}
+      objectReference: {fileID: 1369513987}
     - target: {fileID: 7213635855591993834, guid: 13c5aac97a67d854bb54745b2dd57ea3, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2120,6 +2177,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1270606305 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6692950175326815675, guid: 83ed0cda6c2da4746bbb465ce3a08f0d, type: 3}
+  m_PrefabInstance: {fileID: 13332618}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba5b7167a84508542b9bd13a48fbac32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1283561335
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,7 +3428,9 @@ MonoBehaviour:
   Player: {fileID: 1952380227}
   playerCollect: {fileID: 0}
   player: {fileID: 0}
+  playerHeart: {fileID: 0}
   shake: {fileID: 519420033}
+  DataCollected: {fileID: 1270606305}
 --- !u!4 &1800169550
 Transform:
   m_ObjectHideFlags: 0
@@ -4020,3 +4090,4 @@ SceneRoots:
   - {fileID: 1474515620}
   - {fileID: 1715742298}
   - {fileID: 79095054}
+  - {fileID: 13332618}

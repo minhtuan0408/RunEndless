@@ -35,21 +35,21 @@ public class ItemCollectLevel_2 : MonoBehaviour
         {
             case "Screw":
                 ScrewCount++;
-                ScrewText.text = $"{ScrewCount}/1";
+                ScrewText.text = $"{ScrewCount}/5";
                 break;
 
             case "Screwdrive":
                 ScrewdriveCount++;
-                ScrewdriveText.text = $"{ScrewdriveCount}/1";
+                ScrewdriveText.text = $"{ScrewdriveCount}/5";
                 break;
 
             case "Wrench":
                 WrenchCount++;
-                WrenchText.text = $"{WrenchCount}/1";
+                WrenchText.text = $"{WrenchCount}/5";
                 break;
         }
 
-        if (ScrewCount >= 1 && ScrewdriveCount >=1 && WrenchCount >= 1)
+        if (ScrewCount >= 5 && ScrewdriveCount >=5 && WrenchCount >= 5)
         {
             Level_2.Instance.TurnOffSpawn();
             StartCoroutine(LoadNextLevel());
@@ -70,6 +70,7 @@ public class ItemCollectLevel_2 : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
 
+        Level_2.Instance.SaveCurrentScore();
         SceneManager.LoadScene("EndGamePlay");
     }
 

@@ -10,8 +10,19 @@ public class PlayerHeart : MonoBehaviour
 
     private void Awake()
     {
-        HeartCount = HeartImage.Length;
+        HeartCount = PlayerPrefs.GetInt("CurrentHP", 0);
     }
 
+    private void Start()
+    {
+        LoadHeartUI();
+    }
 
+    private void LoadHeartUI()
+    {
+        for (int i = 0; i < HeartImage.Length; i++)
+        {
+            HeartImage[i].SetActive(i < HeartCount);
+        }
+    }
 }

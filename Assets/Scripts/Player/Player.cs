@@ -84,9 +84,6 @@ public class Player : MonoBehaviour
 
     public Animator SceneAnimator;
 
-    #region Data
-    private int HeartData;
-    #endregion
 
     #region Observer
     // lưu tất cá các observer vào list này
@@ -126,7 +123,7 @@ public class Player : MonoBehaviour
     {
         transform.position = new Vector3(RoadPosition[1].position.x, RoadPosition[1].position.y, transform.position.z);
         index = 1;
-        HeartData = PlayerPrefs.GetInt("CurrentHP", 3);
+
 
         shake = CameraShake.GetComponent<Animator>();
         playerHeart = GetComponent<PlayerHeart>();
@@ -139,7 +136,7 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
-        LoadHeartData();
+     
         mainCamera = Camera.main;
         int selectedSkinIndex = PlayerPrefs.GetInt("SelectedSkin", 0);
         animator.runtimeAnimatorController = animatorControllers[selectedSkinIndex];
@@ -149,14 +146,7 @@ public class Player : MonoBehaviour
         
     }
 
-    private void LoadHeartData()
-    {
-        for (int i = 0; i < 3 - HeartData; i++)
-        {
-            playerHeart.HeartImage[playerHeart.HeartCount - 1].SetActive(false);
-            playerHeart.HeartCount--;
-        }
-    }
+
     private void Update()
     {
         if (FreeMove)
